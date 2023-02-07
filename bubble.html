@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+  <!-- Find details at https://javascript.info/bubbling-and-capturing -->
+  <div id="outDiv" style="padding:10px;background-color:blue">
+  <input id="textbox" type="text">
+  <div>
+  <script>
+    
+
+    document.addEventListener("keyup", documentKeyUpCapture, true);
+    document.querySelector("#outDiv").addEventListener("keyup", outKeyUpCapture, true);
+    document.querySelector("#textbox").addEventListener("keyup", textboxKeyUpCapture, true);
+
+    document.addEventListener("keyup", documentKeyUp);
+    document.querySelector("#outDiv").addEventListener("keyup", outKeyUp);
+    document.querySelector("#textbox").addEventListener("keyup", textboxKeyUp);
+
+    
+    function documentKeyUp(e){
+      console.log("Key event in document (bubble)");
+    }
+    function outKeyUp(e){
+      console.log("Key event in outer div (bubble)")
+      //e.stopPropagation()
+    }
+    function textboxKeyUp(e){
+      console.log("Key event in text box (bubble)")
+      //e.stopPropagation()
+    }
+
+    function documentKeyUpCapture(e){
+      console.log("Key event in document (capture)");
+    }
+    function outKeyUpCapture(e){
+      console.log("Key event in outer div (capture)")
+      //e.stopPropagation()
+    }
+    function textboxKeyUpCapture(e){
+      console.log("Key event in text box (capture)")
+      //e.stopPropagation()
+    }
+
+
+    for (let i = 0; i < 1000; i++) {
+      let div = document.createElement("div")
+      div.innerHTML = "Div " + i;
+      document.body.appendChild(div);
+    }
+  </script>
+</body>
+
+</html>
